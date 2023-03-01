@@ -4,4 +4,5 @@ Ahmet Eren BOYACI - 191101038
 E-mail Address: [aboyaci@etu.edu.tr](mailto:aboyaci@etu.edu.tr)
 
 ## GUI Demo
-https://user-images.githubusercontent.com/53049910/222222309-b4a2aaa3-2667-42d0-bbeb-fc163f90e8b2.mp4
+
+https://user-images.githubusercontent.com/53049910/222233543-839ec9a1-3cf6-48e8-b122-6757935c98a4.mov
