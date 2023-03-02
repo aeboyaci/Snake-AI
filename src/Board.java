@@ -24,7 +24,7 @@ public class Board extends JPanel implements ActionListener {
 
     public Board() {
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        this.setBackground(Color.BLACK);
+        this.setBackground(Color.decode("#004e00"));
         this.setFocusable(true);
         this.addKeyListener(new KeyAdapter() {
             @Override
@@ -61,8 +61,8 @@ public class Board extends JPanel implements ActionListener {
 
     public void move() {
         for (int i = snakeLength; i > 0; i--) {
-            snakePositionX[i] = snakePositionX[i - 1];
-            snakePositionY[i] = snakePositionY[i - 1];
+            snakePositionX[i] = snakePositionX[i - 1] % WIDTH;
+            snakePositionY[i] = snakePositionY[i - 1] % HEIGHT;
         }
 
         switch (direction) {
@@ -70,14 +70,21 @@ public class Board extends JPanel implements ActionListener {
                 snakePositionX[0] -= SNAKE_NODE_SIZE;
                 break;
             case RIGHT:
-                snakePositionX[0] += SNAKE_NODE_SIZE;
+                snakePositionX[0] = (snakePositionX[0] + SNAKE_NODE_SIZE) % WIDTH;
                 break;
             case UP:
                 snakePositionY[0] -= SNAKE_NODE_SIZE;
                 break;
             case DOWN:
-                snakePositionY[0] += SNAKE_NODE_SIZE;
+                snakePositionY[0] = (snakePositionY[0] + SNAKE_NODE_SIZE) % HEIGHT;
                 break;
+        }
+
+        if (snakePositionX[0] < 0) {
+            snakePositionX[0] = WIDTH - SNAKE_NODE_SIZE;
+        }
+        if (snakePositionY[0] < 0) {
+            snakePositionY[0] = HEIGHT - SNAKE_NODE_SIZE;
         }
     }
 
@@ -119,8 +126,12 @@ public class Board extends JPanel implements ActionListener {
             g.setColor(Color.RED);
             g.fillOval(food.getPositionX(), food.getPositionY(), SNAKE_NODE_SIZE, SNAKE_NODE_SIZE);
 
-            g.setColor(Color.GREEN);
-            for (int i = 0; i < snakeLength; i++) {
+            // Draw head
+            g.setColor(Color.ORANGE);
+            g.fillRect(snakePositionX[0], snakePositionY[0], SNAKE_NODE_SIZE, SNAKE_NODE_SIZE);
+
+            g.setColor(Color.decode("#6179F2"));
+            for (int i = 1; i < snakeLength; i++) {
                 g.fillRect(snakePositionX[i], snakePositionY[i], SNAKE_NODE_SIZE, SNAKE_NODE_SIZE);
             }
             return;
