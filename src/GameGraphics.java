@@ -1,8 +1,10 @@
 import javax.swing.*;
 
-public class Graphics extends JFrame {
-    public Graphics() {
-        this.add(new Board());
+public class GameGraphics extends JFrame {
+    public GameGraphics(JFrame homeGraphics) {
+        homeGraphics.setVisible(false);
+
+        this.add(new Game(homeGraphics, this));
         this.setTitle("Snake Game AI Solver");
         this.pack();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
