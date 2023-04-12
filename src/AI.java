@@ -126,19 +126,20 @@ public class AI {
     }
 
     private LinkedList<Node> aStarSearch(Snake s, Node goal) {
-        PriorityQueue<Node> openSet = new PriorityQueue<Node>(Comparator.comparingInt(node -> manhattanDistance(node, goal)));
+        PriorityQueue<Node> openList = new PriorityQueue<Node>(Comparator.comparingInt(node -> manhattanDistance(node, goal)));
+        List<String> openSet = new ArrayList<String>();
         List<String> closedSet = new ArrayList<String>();
         Node start = s.getHead();
 
         start.setG(0);
         start.setH(0);
-        openSet.add(start);
-        while (!openSet.isEmpty()) {
-            Node current = openSet.poll();
+        openList.add(start);
+        while (!openList.isEmpty()) {
+            Node current = openList.poll();
 
             List<Node> neighbours = current.getNeighbours();
             for (Node node : neighbours) {
-                if (closedSet.contains(node.toString()) || s.hasCollision(node) || !s.canMoveTo(node)) {
+                if (openSet.contains(node.toString()) || closedSet.contains(node.toString()) || s.hasCollision(node) || !s.canMoveTo(node)) {
                     continue;
                 }
                 node.setParent(current);
@@ -156,11 +157,13 @@ public class AI {
                 if (tentativeGScore < node.getG()) {
                     node.setG(tentativeGScore);
                     node.setH(manhattanDistance(node, goal));
-                    openSet.add(node);
+                    openList.add(node);
+                    openSet.add(node.toString());
                 }
             }
 
-            openSet.remove(current);
+            openList.remove(current);
+            openSet.remove(current.toString());
             closedSet.add(current.toString());
         }
 
