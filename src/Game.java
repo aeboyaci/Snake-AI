@@ -6,14 +6,16 @@ import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 
 public class Game extends JPanel {
-    public static final int WIDTH = 750;
-    public static final int HEIGHT = 750;
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 800;
     public static final int BOARD_SIZE = (WIDTH * HEIGHT) / (Snake.SNAKE_NODE_SIZE * Snake.SNAKE_NODE_SIZE);
 
     private final FoodProvider foodProvider = new FoodProvider();
 
     private final Snake snake;
     private final AI snakeAi;
+
+    private int eatenCount;
 
     public Game(JFrame homeGraphics, JFrame gameGraphics) {
 
@@ -32,6 +34,7 @@ public class Game extends JPanel {
             }
         });
 
+        eatenCount = -1;
         snake = new Snake();
         spawnFood();
 
@@ -43,6 +46,8 @@ public class Game extends JPanel {
 
     private void spawnFood() {
         foodProvider.spawn(snake);
+        eatenCount++;
+        System.out.println(eatenCount);
     }
 
     @Override
@@ -99,5 +104,9 @@ public class Game extends JPanel {
         x = (WIDTH - getFontMetrics(g.getFont()).stringWidth(restartGameText)) / 2;
         y = (HEIGHT / 2) + 40;
         g.drawString(restartGameText, x, y);
+
+        x = (WIDTH - getFontMetrics(g.getFont()).stringWidth(String.valueOf(eatenCount))) / 2;
+        y = (HEIGHT / 2) + 80;
+        g.drawString(String.valueOf(eatenCount), x, y);
     }
 }

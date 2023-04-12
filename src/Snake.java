@@ -10,7 +10,7 @@ public class Snake {
 
     public Snake() {
         nodes = new Node[Game.BOARD_SIZE];
-        snakeLength = 8;
+        snakeLength = 1;
         moving = true;
 
         for (int i = 0; i < Game.BOARD_SIZE; i++) {

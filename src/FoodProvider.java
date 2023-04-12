@@ -2,11 +2,8 @@ import java.util.Random;
 
 public class FoodProvider {
     private Node food;
-    private int count = -1;
 
     public void spawn(Snake snake) {
-        count++;
-        System.out.println(count);
         Node node = generate();
         while (snake.hasCollision(node)) {
             node = generate();

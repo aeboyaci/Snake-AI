@@ -7,7 +7,7 @@ public class HomeGraphics extends JFrame {
 
         JButton bestFirstSearchButton = new JButton("Best-First Search");
         bestFirstSearchButton.addActionListener(e -> {
-            System.out.println("best");
+            System.out.println("Best-First Search\n---");
             AI.setSearchMethod(SearchMethod.BEST_FIRST_SEARCH);
             new GameGraphics(this);
         });
@@ -15,7 +15,7 @@ public class HomeGraphics extends JFrame {
 
         JButton aStarSearchButton = new JButton("A* Search");
         aStarSearchButton.addActionListener(e -> {
-            System.out.println("a*");
+            System.out.println("A* Search\n---");
             AI.setSearchMethod(SearchMethod.A_STAR_SEARCH);
             new GameGraphics(this);
         });
