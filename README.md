@@ -1,4 +1,4 @@
-# BIL441-Project
+# Snake AI
 Ahmet Eren BOYACI - 191101038
 
 E-mail Address: [aboyaci@etu.edu.tr](mailto:aboyaci@etu.edu.tr)
